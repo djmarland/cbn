@@ -1,0 +1,67 @@
+* {
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+html {
+    font-size: ($base-font-size/16) * 100%; // based on browser default of 16px
+
+}
+body {
+    color: $html-textcolor;
+    padding: 0;
+    margin: 0;
+	background-color: $html-color;
+}
+.content {
+    color: $text-color;
+    background-color: $body-color;
+    padding-left: $spacing-unit;
+    padding-right: $spacing-unit;
+}
+.situated {
+    padding-left: $spacing-unit;
+    padding-right: $spacing-unit;
+}
+.situated--half {
+    padding-left: $spacing-unit-half;
+    padding-right: $spacing-unit-half;
+}
+
+
+img {
+    max-width: 100%;
+}
+
+a {
+    color: $link-color;
+}
+a:visited {
+    color: $link-visited;
+}
+a:hover,
+a:active,
+a:focus {
+    color: $comp-color;
+}
+
+.content {
+    padding-top: $spacing-unit;
+    padding-bottom: $spacing-unit;
+}
+
+.spaced {
+    margin-bottom: $spacing-unit;
+}
+
+.container {
+    display: block;
+    padding: 0 $spacing-unit-half;
+    margin: 0 auto;
+    max-width: 1280px;
+}
+@media all and (min-width: pxtoem(768)) {
+    .container {
+        padding: 0 $spacing-unit;
+    }
+}

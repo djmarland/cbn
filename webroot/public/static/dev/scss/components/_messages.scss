@@ -1,0 +1,30 @@
+.message {
+    margin: 8px 0;
+    padding: 8px;
+    color: #333;
+    background: #ccc;
+    border: solid 1px #999;
+    border-radius: 2px;
+    i {
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+}
+
+.message--error {
+    color: #933;
+    background: #fcc;
+    border: solid 1px #c99;
+}
+
+.message--notice {
+    color: #339;
+    background: #ccf;
+    border: solid 1px #99c;
+}
+
+.message--ok {
+    color: #393;
+    background: #cfc;
+    border: solid 1px #9c9;
+}

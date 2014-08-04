@@ -1,0 +1,27 @@
+.header {
+    background: $html-color;
+    a {
+        text-decoration: none;
+        padding: $spacing-unit-half;
+        display: inline-block;
+        &:link,
+        &:visited {
+            color: $html-textcolor;
+        }
+        &:hover,
+        &:active,
+        &:focus {
+            color: $html-textcolor;
+            background: $link-color;
+        }
+    }
+}
+.header__nav {
+    text-transform: uppercase;
+    li {
+        display: inline;
+    }
+}
+.header__search {
+    margin-right: 8px;
+}

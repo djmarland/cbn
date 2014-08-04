@@ -1,0 +1,9 @@
+@function pxtoem($pixels, $context: $base-font-size) {
+  @return #{$pixels/$context}em
+}
+
+@mixin font-size($size, $base: $base-font-size) {
+    // size is the rem value
+  font-size: ($size*$base-font-size) + px;
+  font-size: $size + rem;
+}

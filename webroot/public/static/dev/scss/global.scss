@@ -1,0 +1,22 @@
+
+// globals
+@import 'global/normalize.scss';
+@import 'global/bootstrap.scss';
+@import 'global/variables.scss';
+@import 'global/mixins.scss';
+
+
+@import 'fontawesome/all.scss';
+
+// components
+@import 'components/base.scss';
+@import 'components/typography.scss';
+@import 'components/grid.scss';
+@import 'components/code.scss';
+@import 'components/highlight.scss';
+@import 'components/lists.scss';
+@import 'components/messages.scss';
+@import 'components/header.scss';
+@import 'components/footer.scss';
+// print
+@import 'global/print.scss';

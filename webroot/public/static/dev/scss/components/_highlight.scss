@@ -1,0 +1,13 @@
+
+.h-box, blockquote {
+    background: $highlight-color; /* #019-875 */
+    color: #FFF;
+    padding: 16px;
+    padding: 1rem;
+}
+.h-color {
+    color: $highlight-color;
+}
+.h-bg {
+    background: $highlight-color;
+}

@@ -1,5 +1,13 @@
 vagrant
 .vagrant
 .idea
-webroot
+webroot/node_modules
+webroot/vendor
+webroot/.sass-cache
+webroot/bootstrap/compiled.php
+webroot/composer.phar
+webroot/composer.lock
+webroot/.env.*.php
+webroot/.env.php
 .DS_Store
+.elasticbeanstalk/

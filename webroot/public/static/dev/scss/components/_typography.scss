@@ -1,0 +1,66 @@
+
+.font-default {
+  font-family: sans-serif;
+}
+.font-styled {
+  font-family: sans-serif;
+}
+h1, .a {
+    @include font-size(2.4);
+    line-height:1.2;
+    margin: 0 0 $spacing-unit-mini 0;
+    font-weight: lighter;
+    text-transform: none;
+    font-family: $heading-font-family;
+}
+h2, .b {
+    @include font-size(1.5);
+    line-height:1.2;
+    margin: 0 0 $spacing-unit-mini 0;
+    font-weight: lighter;
+    font-family: $heading-font-family;
+    text-transform: uppercase;
+}
+h3, .c {
+    @include font-size(1.5);
+    line-height:1.2;
+    margin: 0 0 $spacing-unit-mini 0;
+    font-weight: normal;
+    font-family: $heading-font-family;
+    text-transform: none;
+}
+h4, .d {
+    font-weight: bold;
+    @include font-size(1.2);
+    line-height:1.2;
+    margin: 0 0 $spacing-unit-mini 0;
+    text-transform: none;
+}
+h5, .e, body {
+    font-weight: normal;
+    @include font-size(1);
+    line-height:1.6;
+    margin: 0 0 $spacing-unit-mini 0;
+    text-transform: none;
+}
+h6, .f, small {
+    font-weight: bold;
+    @include font-size(0.75);
+    line-height:1.33333333;
+    margin: 0 0 $spacing-unit-mini 0;
+    text-transform: none;
+}
+p {
+    margin: 0 0 1em 0;
+}
+.prose p {
+    text-align: justify;
+    max-width: 768px;
+    max-width: 48rem;
+}
+.text--right {
+    text-align: right;
+}
+.text--center {
+    text-align: center;
+}
