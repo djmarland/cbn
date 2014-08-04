@@ -1,0 +1,35 @@
+Install vagrant
+Install virtualbox
+
+Download https://github.com/jrodriguezjr/puppet-lamp-stack
+
+Create 'webroot' folder in directory
+
+$ vagrant up
+
+$ vagrant ssh
+
+-
+
+$ cd /vagrant/webroot
+$ curl -s http://getcomposer.org/installer | php
+$ php composer.phar create-project symfony/framework-standard-edition vagrant.dev
+
+setup timezone
+sudo vi /etc/php5/apache2/php.ini
+
+
+
+
+
+
+=====================
+
+http://localhost:8888
+
+phpmyadmin:
+
+username: root
+password: root
+
+
