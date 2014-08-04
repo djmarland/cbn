@@ -2,17 +2,27 @@ module.exports = function(grunt) {
     grunt.initConfig({
         staticPath: 'public/static/dev',
         pkg: grunt.file.readJSON('package.json'),
-        sass: {
-            dist: {
-                files: {
-                    '<%=staticPath%>/css/global.css' : '<%=staticPath%>/scss/global.scss'
+        watch: {
+            sass: {
+                files: ['<%=staticPath%>/scss/**/*.scss}'],
+                tasks: ['sass:dist']
+            },
+            livereload: {
+                files: ['*.html', '*.php', 'js/**/*.{js,json}', 'css/*.css','img/**/*.{png,jpg,jpeg,gif,webp,svg}'],
+                options: {
+                    livereload: true
                 }
             }
         },
-        watch: {
-            css: {
-                files: '<%=staticPath%>/scss/**/*.scss',
-                tasks: ['sass']
+        sass: {
+            options: {
+                sourceComments: 'map',
+                outputStyle: 'compressed'
+            },
+            dist: {
+                files: {
+                    '<%=staticPath%>/css/global.css': '<%=staticPath%>/scss/global.scss'
+                }
             }
         },
         jshint: {
@@ -20,7 +30,7 @@ module.exports = function(grunt) {
             files: [
                 'Gruntfile.js',
                 '<%=staticPath%>/js/**/*.js',
-                '!<%=staticPath%>/js/vendor/**',
+                '!<%=staticPath%>/js/vendor/**'
             ],
             options: {
                 globals: {
@@ -58,11 +68,12 @@ module.exports = function(grunt) {
                         }
                 })
             }
-        },
+        }
     });
-    grunt.loadNpmTasks('grunt-contrib-sass');
+
+    grunt.registerTask('default', ['sass:dist']);
+    grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.registerTask('default',['sass']);
 };

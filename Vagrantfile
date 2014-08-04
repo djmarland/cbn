@@ -16,3 +16,12 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "webroot/", "/vagrant/webroot/", :owner => "www-data"
   #:mount_options => ["dmode=777","fmode=666"]
 end
+
+
+# -todo
+# aws tools
+# grunt (--no-bin-links)
+# grunt cli
+# sass (lib-sass)
+
+#(run as admin)
