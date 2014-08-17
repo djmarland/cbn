@@ -60,6 +60,20 @@ class User extends Base implements UserInterface, RemindableInterface {
         return true;
     }
 
+    public function updateAdminStatus($status)
+    {
+        $this->is_site_admin = (boolean)$status;
+        $this->save();
+        return true;
+    }
+
+    public function updateName($name)
+    {
+        $this->name = $name;
+        $this->save();
+        return true;
+    }
+
     public function updateEmail($new_email)
     {
         if ($new_email == $this->email) {
@@ -176,13 +190,36 @@ class User extends Base implements UserInterface, RemindableInterface {
     }
 
     /**
-     * Get the e-mail address where password reminders are sent.
+     * Does the user have a verified e-mail address.
      *
-     * @return string
+     * @return boolean
      */
     public function isVerified()
     {
         return $this->verified == 1;
+    }
+
+    /**
+     * Is the user a site-wide admin.
+     *
+     * @return boolean
+     */
+    public function isAdmin()
+    {
+        return $this->is_site_admin == 1;
+    }
+
+    public function hasName()
+    {
+        return (isset($this->name) && !empty($this->name));
+    }
+
+    public function getDisplayName()
+    {
+        if ($this->hasName()) {
+            return $this->name;
+        }
+        return $this->url_key();
     }
 
     public function sameAs($user)

@@ -45,6 +45,18 @@ Route::filter('auth', function()
     }
 });
 
+Route::filter('auth.admin', function()
+{
+    if (Auth::guest()) {
+        return View::make('users.login');
+        /*return Redirect::route('login')
+            ->with('flash_error', 'You must be logged in to view this page!');*/
+    }
+    if (!Auth::user()->isAdmin()) {
+        App::abort(403, 'Unauthorized action.');
+    }
+});
+
 
 Route::filter('auth.basic', function()
 {

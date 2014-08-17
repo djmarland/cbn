@@ -20,7 +20,7 @@
                     <div class="header__nav" id="nav">
                         <nav>
                         <ul class="list--unstyled text--right">
-                                <li class="header__navitem header__search"><input type="search" placeholder="Search for a business or skillset" /><button class="btn" ype="submit"><i class="fa fa-search"></i></button></li>
+                                <li class="header__navitem header__search"><input type="search" placeholder="Search for a business or skillset" /><button type="submit"><i class="fa fa-search"></i></button></li>
                             @if(Auth::check())
                                 <li class="header__navitem"><a href="{{ URL::route('user_dashboard', array('key' => Auth::user()->url_key())) }}">Dashboard</a></li>
                                 <li class="header__navitem"><a href="{{ URL::route('logout') }}"><i class="fa fa-sign-out"></i> Log out</a></li>

@@ -120,8 +120,24 @@ class UsersController extends BaseController {
             ->with(array('data' => $this->data));
         }
 
+        // show admin status
+        $this->data->show_admin_status = false;
+        $this->data->editable_admin_status = false;
+        // show status if this user is an admin, or the visitor is an admin
+        if ($this->data->user->isAdmin() || Auth::user()->isAdmin()) {
+            $this->data->show_admin_status = true;
+            $this->data->editable_admin_status = $this->adminStatusEditable();
+        }
+
         return View::make('users.edit')
             ->with(array('data' => $this->data));
+    }
+
+    protected function adminStatusEditable()
+    {
+        // editable as long as the visitor is an admin, and is not this user
+        // (cannot set your own admin status)
+        return (Auth::user()->isAdmin() && !$this->data->user->sameAs(Auth::user()));
     }
 
     public function doEdit($user_key)
@@ -145,27 +161,48 @@ class UsersController extends BaseController {
             $message_type = 'flash_error';
             $message = 'Please check the form';
         } else {
+            $name = Input::get('name');
             $email = Input::get('email');
             $password = Input::get('password');
 
             $message = 'No changes made';
             $message_type = 'flash_notice';
+            $ok_default = false;
+
+            if ($name != $this->data->user->name) {
+                $this->data->user->updateName($name);
+                $ok_default = true;
+            }
+
             if ($password) {
                 $this->data->user->updatePassword($password);
-                $message = 'Your details were updated';
-                $message_type = 'flash_ok';
+                $ok_default = true;
             }
+
+            if ($this->adminStatusEditable()) {
+                $admin_status = Input::get('is_site_admin');
+                $this->data->user->updateAdminStatus(!empty($admin_status));
+                $ok_default = true;
+            }
+
             if ($email && $email != $this->data->user->email) {
 
                 if (User::emailExists($email)) {
                     $message = 'That e-mail address is already in use for another account. Please choose another';
                     $message_type = 'flash_error';
+                    $ok_default = false;
                 } else {
                     // e-mail changed. Update it
                     $this->data->user->updateEmail($email);
                     $message = 'Your details were updated. Your account is limited until you <a href="' . URL::route('verify') . '">verify your e-mail address</a>';
                     $message_type = 'flash_ok';
+                    $ok_default = false;
                 }
+            }
+
+            if ($ok_default) {
+                $message = 'Your details were updated';
+                $message_type = 'flash_ok';
             }
         }
         return Redirect::route('user_edit', array('key' => $this->data->user->url_key()))
@@ -210,10 +247,20 @@ class UsersController extends BaseController {
             Session::flash('flash_error', 'No such user');
             return false;
         }
-        if ($restricted && !$this->data->user->sameAs(Auth::user())) {
+        if ($restricted &&
+            (!Auth::user()->isAdmin() && !$this->data->user->sameAs(Auth::user()))
+            ) {
             Session::flash('flash_error', 'You do not have permission to view this page');
             return false;
         }
         return true;
+    }
+
+    public function listAction()
+    {
+        $this->data->users = User::all();
+
+        return View::make('users.list')
+            ->with(array('data' => $this->data));
     }
 }

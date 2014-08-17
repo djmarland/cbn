@@ -40,6 +40,9 @@ Route::get(
 
 // users
 Route::get(
+    '/users',    array('uses' => 'UsersController@listAction','as' => 'user_list'))->before('auth.admin');
+
+Route::get(
     '/users/{key}',    array('uses' => 'UsersController@profile','as' => 'user_profile'));
 
 Route::get(

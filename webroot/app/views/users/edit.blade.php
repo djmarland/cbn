@@ -8,6 +8,14 @@
             {{ Form::open(array('route' => array('user_edit', $data->user->url_key()))) }}
             <!-- if there are login errors, show them here -->
             <p>
+                {{ Form::label('name', 'Name (for display)') }}
+                {{ Form::text(
+                'name',
+                (Input::old('name')) ? Input::old('name') : $data->user->name
+                ) }}
+                {{ $errors->first('email') }}
+            </p>
+            <p>
                 {{ Form::label('email', 'Email Address') }}
                 {{ Form::email(
                     'email',
@@ -32,6 +40,20 @@
                 {{ $errors->first('password_confirmation') }}
             </p>
             </fieldset>
+
+            @if ($data->show_admin_status)
+                @if ($data->editable_admin_status)
+                    {{ Form::label('is_site_admin', 'Is Site Admin?') }}
+                    {{ Form::checkbox(
+                        'is_site_admin',
+                        1,
+                        (Input::old('is_site_admin')) ? Input::old('is_site_admin') : $data->user->isAdmin()
+                    ) }}
+                    {{ $errors->first('is_site_admin') }}
+                @else
+                    <p class="btn">User is an admin</p>
+                @endif
+            @endif
 
             <p>{{ Form::submit('Submit!') }}</p>
         {{ Form::close() }}

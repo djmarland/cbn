@@ -1,0 +1,23 @@
+table {
+  width: 100%;
+}
+
+.table {
+  th,td {
+    text-align: left;
+    padding: 6px;
+  }
+  .cell--center {
+    text-align: center;
+  }
+  .cell--action {
+    text-align: center;
+    width: 10%;
+  }
+  thead {
+    background: #ccc;
+  }
+  tr:nth-child(even) {
+    background: #ddd;
+  }
+}

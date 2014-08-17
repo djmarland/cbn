@@ -3,7 +3,11 @@
 @section('content')
     <div class="grid"><!--
     --><div class="g">
-            <h1>Dashboard</h1>
+            <h1>@if ($data->user->hasName())
+                Welcome {{ $data->user->name }}
+            @else
+                Your dashboard
+            @endif</h1>
             @include('partials.messages')
             <ul>
                 <li><a href="{{ URL::route('user_edit', array('key' => $data->user->url_key())) }}">Edit details</a></li>
@@ -28,6 +32,18 @@
                     <p><a href="#">Join a company</a></p>
                 </div>
             </div>
+            @if ($data->user->isAdmin())
+            <div class="box">
+                <div class="box__head">
+                    <h2>Admin</h2>
+                </div>
+                <div class="box__body">
+                       <ul>
+                           <li><a href="{{ URL::route('user_list') }}">All users</a></li>
+                       </ul>
+                </div>
+            </div>
+            @endif
         </div><!--
     --></div>
 @stop
