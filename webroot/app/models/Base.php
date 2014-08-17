@@ -32,6 +32,15 @@ class Base extends Eloquent {
     {
         return ($this->id == $obj->id);
     }
+
+    public static function getJoinQuery()
+    {
+        $properties = array();
+        foreach (static::$_properties as $property) {
+            $properties[] = static::TABLE . '.' . $property . ' as "' . static::TABLE . '.' . $property . '"';
+        }
+        return implode(', ',$properties);
+    }
 /*
     protected static function table()
     {

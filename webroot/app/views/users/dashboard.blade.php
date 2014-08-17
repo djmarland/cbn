@@ -19,14 +19,25 @@
                     <h2>My companies</h2>
                 </div>
                 <div class="box__body">
-                    @if(!empty($data->companies))
-                        <ul>
-                            @foreach($data->companies as $company)
-                                <li><a href="{{ URL::route('companies_show', array(
-                                    'key' => $company->url_entity()
-                                )) }}">{{ $company->name }}</a></li>
+                    @if(!empty($data->has_companies))
+                        <table class="table">
+                            <thead>
+                                <th>Company</th>
+                                <th>Member status</th>
+                            </thead>
+                            <tbody>
+                            @foreach($data->companies_for_user as $company_for_user)
+                                <tr>
+                                    <td><a href="{{ URL::route('companies_show', array(
+                                    'key' => $company_for_user->getCompany()->url_entity()
+                                )) }}">{{ $company_for_user->getCompany()->name }}</a></td>
+                                    <td>{{ $company_for_user->getStatusText() }}</td>
+                                </tr>
                             @endforeach
-                        </ul>
+                            </tbody>
+                        </table>
+                    @else
+                        <p>You are not yet a member of any companies</p>
                     @endif
                     <p><a href="{{ URL::route('companies_new') }}">Create a new company</a></p>
                     <p><a href="#">Join a company</a></p>

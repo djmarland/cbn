@@ -12,22 +12,26 @@ class CreateUserInCompanyTable extends Migration {
 	 */
 	public function up()
 	{
-		{
+        Schema::create('user_in_company', function(Blueprint $t) {
             $t->increments('id');
-            $t->primary('id');
 
             $t->integer('user_id');
-            $t->foreign('user_id')->references('id')->on('users');
 
             $t->integer('company_id');
-            $t->foreign('company_id')->references('id')->on('companies');
 
             $t->integer('status')->default(0);
 
             $t->tinyInteger('show_on_user_profile')->default(1);
+            $t->dateTime('start_date')->nullable();
+            $t->dateTime('end_date')->nullable();
 
             $t->timestamps();
-		});
+        });
+
+        Schema::table('user_in_company', function(Blueprint $t) {
+            //$t->foreign('user_id')->references('id')->on('users');
+            //$t->foreign('company_id')->references('id')->on('companies');
+        });
 	}
 
 	/**

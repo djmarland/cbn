@@ -4,7 +4,20 @@ class Company extends Base {
 
     const KEY_PREFIX = 'c';
 
-    public $table = 'companies';
+    const TABLE = 'companies';
+
+    // @todo - get rid of eloquent
+    protected $fillable = array('*');
+
+    public static $_properties = array(
+        'id',
+        'name',
+        'url_word',
+        'created_by',
+        'created_at',
+        'updated_at',
+        'parent_company'
+    );
 
     public static function Register($companydata)
     {

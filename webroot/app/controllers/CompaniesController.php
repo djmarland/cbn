@@ -43,6 +43,13 @@ class CompaniesController extends BaseController {
             );
 
             $company = Company::Register($companydata);
+            // create the admin relationship for this company/user
+            UserInCompany::createNewRelationship(
+                Auth::user(),
+                $company,
+                UserInCompany::STATUS_ADMIN
+            );
+
             return Redirect::route('companies_show', array(
                 'key' => $company->url_entity()
             ))->with('flash_ok', 'Company created');
@@ -67,6 +74,13 @@ class CompaniesController extends BaseController {
         $this->data->divisions_count = Company::countByParentCompany($this->data->company);
 
         $this->data->parent_company = Company::findByChildCompany($this->data->company);
+
+        // users in company
+        $this->data->users_in_company = UserInCompany::findActiveUsersByCompany($this->data->company);
+        $this->data->show_users = false;
+        if (count($this->data->users_in_company) > 0) { // change to greater than 1
+            $this->data->show_users = true;
+        }
 
         return View::make('companies.show')
             ->with(array('data' => $this->data));

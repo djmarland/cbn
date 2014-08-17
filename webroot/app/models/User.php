@@ -7,7 +7,22 @@ class User extends Base implements UserInterface, RemindableInterface {
 
     const KEY_PREFIX = 'u';
 
-    public $table = 'users';
+    const TABLE = 'users';
+
+    public static $_properties = array(
+        'id',
+        'name',
+        'email',
+        'password',
+        'created_at',
+        'updated_at',
+        'remember_token',
+        'verified',
+        'is_site_admin'
+    );
+
+    // @todo - get rid of eloquent
+    protected $fillable = array('*');
 
     /**
      * The attributes excluded from the model's JSON form.

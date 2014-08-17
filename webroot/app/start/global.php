@@ -20,6 +20,7 @@ ClassLoader::addDirectories(array(
 
 ));
 
+
 /*
 |--------------------------------------------------------------------------
 | Application Error Logger

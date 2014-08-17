@@ -23,4 +23,18 @@
     </ul>
 </div></div>
 @endif
+
+@if ($data->show_users)<!--
+    --><div class="grid"><!--
+--><div class="g">
+        <h2>Members</h2>
+<ul>
+    @foreach($data->users_in_company as $user_in_company)
+    <li><a href="{{ URL::route('user_profile', array(
+                'key' => $user_in_company->getUser()->url_key()
+            )) }}">{{ $user_in_company->getUser()->getDisplayName() }}</a></li>
+    @endforeach
+</ul>
+    </div></div>
+@endif
 @stop

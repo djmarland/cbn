@@ -96,6 +96,13 @@ class UsersController extends BaseController {
             ->with(array('data' => $this->data));
         }
 
+        // users in company
+        $this->data->companies_for_user = UserInCompany::findActiveCompaniesByUser($this->data->user);
+        $this->data->show_companies = false;
+        if (count($this->data->companies_for_user) > 0) {
+            $this->data->show_companies = true;
+        }
+
         return View::make('users.profile')
             ->with(array('data' => $this->data));
     }
@@ -107,7 +114,8 @@ class UsersController extends BaseController {
             ->with(array('data' => $this->data));
         }
 
-        $this->data->companies = Company::findByCreator($this->data->user);
+        $this->data->companies_for_user = UserInCompany::findAllByUser($this->data->user);
+        $this->data->has_companies = (count($this->data->companies_for_user) > 0);
 
         return View::make('users.dashboard')
             ->with(array('data' => $this->data));
