@@ -24,6 +24,17 @@ setup timezone
 sudo vi /etc/php5/apache2/php.ini
 date.timezone = "Europe/London"
 
+## Database
+Goto http://localhost:8888/phpmyadmin
+Create a new database named 'app'
+In the SSH command line, run:
+```
+php artisan migrate
+```
+This should create all the tables for the app, which should then be visible at http://localhost:8888
+
+
+## For static assets
 sudo apt-get install ruby-rvm
 
 rvm install ruby-1.9.3-p484
