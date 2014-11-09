@@ -16,22 +16,15 @@ $ vagrant ssh (username will be 'vagrant')
 
 $ cd /vagrant/webroot
 
-
-Checkout the CBN application into the 'webroot' directory
-
-
 $ curl -sS https://getcomposer.org/installer | php
 $ sudo mv composer.phar /usr/local/bin/composer
 $ composer install
-
-checkout project into this folder
 
 setup timezone
 sudo vi /etc/php5/apache2/php.ini
 date.timezone = "Europe/London"
 
-\curl -L https://get.rvm.io | bash -s stable --ruby --autolibs=enable --auto-dotfiles
-source /home/vagrant/.rvm/scripts/rvm
+sudo apt-get install ruby-rvm
 
 rvm install ruby-1.9.3-p484
 
